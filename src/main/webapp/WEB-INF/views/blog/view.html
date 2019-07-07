@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>View blog</title>
+</head>
+<style>
+
+    h1 {
+        text-align: center;
+        overflow: hidden;
+        background: linear-gradient(90deg, #000, #ffb419,#000);
+        background-repeat: no-repeat ;
+        background-size: 80%;
+        animation: animate 3s linear infinite;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: rgba(255,255,255,0);
+    }
+    @keyframes animate {
+        0% {
+            background-position: -500%;
+        }
+        100% {
+            background-position: 500%;
+        }
+    }
+
+    #writer {
+        text-align: right;
+    }
+
+    #block {
+        position: absolute;
+        left: 30px;
+        top: 30px;
+        text-align: center;
+        color: white;
+    }
+
+    h2 {
+        text-align: center;
+    }
+
+    #form {
+        width: 68%;
+        position: absolute;
+        left: 220px;
+        color: white;
+    }
+
+    body {
+        background-image: url("http://4.bp.blogspot.com/_2sKYQ1R6pjc/TPvdg-uhPiI/AAAAAAAAAY8/vL5T6v9Pen4/s1600/_silent+night+2.jpg");
+    }
+
+    button {
+        width: 150px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    button:hover {
+        background-color: darkorange;
+    }
+
+</style>
+<div id="block">
+    <p>
+        <a href="/">
+            <button>Blog list</button>
+        </a>
+</div>
+<body>
+
+<form id="form" th:action="@{/edit-blog}" th:object="${blog}" method="get">
+
+    <h1>Welcome to <span th:text="${blog.writer}"></span>'s blog</h1>
+
+    <h2 th:text="${blog.title}"></h2>
+
+    <p id="content" th:text="${blog.content}"></p>
+
+    <div id="writer">
+    Wrote by : <span th:text="${blog.writer}"></span>
+    </div>
+</form>
+</body>
+</html>

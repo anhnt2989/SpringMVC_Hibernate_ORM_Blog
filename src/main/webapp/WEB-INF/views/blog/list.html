@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xml:lang="vi">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Blog List</title>
+</head>
+<style>
+
+    body {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    }
+    #blogs {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    #blogs tr {
+        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    }
+
+    #blogs td, #blogs th {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    #blogs tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    #blogs tr:hover {
+        background-color: #1ddd10;
+    }
+
+    #blogs th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #0217af;
+        color: white;
+    }
+
+    button {
+        width: 150px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    button:hover {
+        background-color: darkorange;
+    }
+</style>
+<body>
+<a href="/create-blog">
+    <button>New blog</button>
+</a>
+<h1>Blogs</h1>
+<table id="blogs">
+    <tr>
+        <th>Title</th>
+        <th>Writer</th>
+        <th style="text-align: center">Edit</th>
+        <th style="text-align: center">Delete</th>
+        <th style="text-align: center">View</th>
+    </tr>
+    <th:block th:each="blog : ${blogs}">
+        <tr>
+            <td th:text="${blog.title}"></td>
+            <td th:text="${blog.writer}"></td>
+            <td style="text-align: center"><a th:href="@{/edit-blog/__${blog.id}__ }">Edit</a></td>
+            <td style="text-align: center"><a th:href="@{/delete-blog/__${blog.id}__ }">Delete</a></td>
+            <td style="text-align: center"><a th:href="@{/view-blog/__${blog.id}__ }">Click here to see this blog</a></td>
+        </tr>
+    </th:block>
+</table>
+<footer> &copy; 2019 Jason Nguyen</footer>
+</body>
+</html>
