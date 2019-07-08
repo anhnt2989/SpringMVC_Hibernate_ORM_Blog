@@ -7,6 +7,7 @@ import com.codegym.blogms.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,10 +30,10 @@ public class BlogController {
     }
 
     @GetMapping("/")
-    public ModelAndView listBlogs(@RequestParam("c")Optional<String> c, Pageable pageable) {
+    public ModelAndView listBlogs(@RequestParam("s")Optional<String> s, @PageableDefault(size = 10) Pageable pageable) {
         Page<Blog> blogs;
-        if(c.isPresent()) {
-            blogs = blogService.findAllByTitleAndWriterAndContent(c.get(), c.get(), c.get(), pageable);
+        if(s.isPresent()) {
+            blogs = blogService.findAllByTitleAndWriterAndContent(s.get(), s.get(), s.get(), pageable);
         } else {
             blogs = blogService.findAll(pageable);
         }

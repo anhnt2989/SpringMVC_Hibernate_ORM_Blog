@@ -14,7 +14,7 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Page<Blog> findAllByTitleAndWriterAndContent(String title, String writer, String content, Pageable pageable) {
-        return blogRepository.findAllByTitleAndWriterAndContent(title, writer,content, pageable);
+        return blogRepository.findAllByTitleAndWriterAndContent(title, writer, content, pageable);
     }
 
     @Override

@@ -2,27 +2,14 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Edit blog</title>
+    <title>Edit province</title>
 </head>
-<body>
 <style>
-
-    #message {
-        color: blue;
-        font-size: large;
-    }
-
     #form {
-        width: 1200px;
+        width: 500px;
         border-radius: 5px;
         background-color: #f2f2f2;
         padding: 20px;
-    }
-
-    #content {
-        font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
-        width: 1000px;
-        border-radius: 5px;
     }
 
     button {
@@ -62,54 +49,39 @@
         cursor: pointer;
         text-align: center;
     }
-
     input[type=submit]:hover {
         background-color: darkorange;
     }
 
+    footer {
+        text-align: right;
+    }
+
 </style>
-<h1>Edit blog</h1>
+<body>
+<h1>Edit province</h1>
 <p>
-    <a href="/">
-        <button>Blog list</button>
-    </a>
+    <a href="/categories"><button>Province list</button></a>
 </p>
-<div id="message">
 <th:block th:if="${message}">
     <p th:text="${message}"></p>
 </th:block>
-</div>
 <div id="form">
-    <form th:action="@{/edit-blog}" th:object="${blog}" method="post">
-        <input th:type="hidden" th:value="blog.id" th:field="*{id}">
+    <form th:action="@{/edit-category}" th:object="${category}" method="post">
+        <input th:type="hidden" name="id" th:field="*{id}">
         <table>
             <tr>
-                <td>Title</td>
-                <td><input type="text"  th:field="*{title}"/></td>
-            </tr>
-            <tr>
-                <td>Content</td>
-                <td><textarea id="content" rows="25"  th:field="*{content}"></textarea></td>
-            </tr>
-            <tr>
-                <td>Writer</td>
-                <td><input type="text" th:field="*{writer}"/></td>
-            </tr>
-            <tr>
-                <td>Category :</td>
-                <td>
-                    <select th:field="*{category}">
-                        <option th:each="p : ${categories}" th:value="${p.id}" th:text="${p.name}"></option>
-                    </select>
-                </td>
+                <td>First name:</td>
+                <td><input type="text" th:field="*{name}"/></td>
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" value="Update"></td>
+                <td><input type="submit" value="Update category"></td>
             </tr>
         </table>
     </form>
 </div>
-</body>
 <footer> &copy; 2019 Jason Nguyen</footer>
+
+</body>
 </html>

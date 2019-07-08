@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xml:lang="vi">
 <head>
-    <meta charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Blog List</title>
 </head>
 <style>
 
+    #search {
+        text-align: right;
+    }
+
+    #search input {
+        border-radius: 10px;
+    }
+
     footer {
         text-align: right;
     }
+
     body {
         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     }
+
     #blogs {
         font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
         width: 100%;
@@ -58,17 +68,33 @@
     button:hover {
         background-color: darkorange;
     }
+
+
 </style>
 <body>
-<a href="/create-blog">
-    <button>New blog</button>
-</a>
-<h1>Blogs</h1>
 
-<form id="search">
-    <input name="c" type="text"/>
-    <input type="submit" value="Search"/>
-</form>
+<span>
+    <a href="/create-blog">
+        <button>New blog</button>
+    </a>
+</span>
+
+<span>
+<a href="/categories">
+    <button>Categories Manager</button>
+</a>
+</span>
+
+<h1>Blogs manager v1.0</h1>
+
+<div id="search">
+    <form>
+        <input name="s" type="text"/>
+        <input type="submit" value="Search"/>
+        <br/>
+    </form>
+    <br>
+</div>
 
 <table id="blogs">
     <tr>
@@ -86,10 +112,16 @@
             <td th:text="${blog.category.name}"></td>
             <td style="text-align: center"><a th:href="@{/edit-blog/__${blog.id}__ }">Edit</a></td>
             <td style="text-align: center"><a th:href="@{/delete-blog/__${blog.id}__ }">Delete</a></td>
-            <td style="text-align: center"><a th:href="@{/view-blog/__${blog.id}__ }">Click here to see this blog</a></td>
+            <td style="text-align: center"><a th:href="@{/view-blog/__${blog.id}__ }">Click here to see this blog</a>
+            </td>
         </tr>
     </th:block>
 </table>
+<div>
+    <a th:href="@{'/'(page=${blogs.number - 1})}" th:if="${blogs.hasPrevious()}">Previous</a>
+    <span th:text="${blogs.number + 1}"></span>/<span th:text="${blogs.totalPages}"></span>
+    <a th:href="@{'/'(page=${blogs.number + 1})}" th:if="${blogs.hasNext()}">Next</a>
+</div>
 <footer> &copy; 2019 Jason Nguyen</footer>
 </body>
 </html>
