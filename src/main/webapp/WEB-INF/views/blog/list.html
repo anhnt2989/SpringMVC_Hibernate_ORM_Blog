@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xml:lang="vi">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset=UTF-8">
     <title>Blog List</title>
 </head>
 <style>
@@ -64,10 +64,17 @@
     <button>New blog</button>
 </a>
 <h1>Blogs</h1>
+
+<form id="search">
+    <input name="c" type="text"/>
+    <input type="submit" value="Search"/>
+</form>
+
 <table id="blogs">
     <tr>
         <th>Title</th>
         <th>Writer</th>
+        <th>Category</th>
         <th style="text-align: center">Edit</th>
         <th style="text-align: center">Delete</th>
         <th style="text-align: center">View</th>
@@ -76,6 +83,7 @@
         <tr>
             <td th:text="${blog.title}"></td>
             <td th:text="${blog.writer}"></td>
+            <td th:text="${blog.category.name}"></td>
             <td style="text-align: center"><a th:href="@{/edit-blog/__${blog.id}__ }">Edit</a></td>
             <td style="text-align: center"><a th:href="@{/delete-blog/__${blog.id}__ }">Delete</a></td>
             <td style="text-align: center"><a th:href="@{/view-blog/__${blog.id}__ }">Click here to see this blog</a></td>

@@ -1,16 +1,18 @@
 package com.codegym.blogms.controller;
 
 import com.codegym.blogms.model.Blog;
+import com.codegym.blogms.model.Category;
 import com.codegym.blogms.service.BlogService;
+import com.codegym.blogms.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.List;
+import java.util.Optional;
+
 
 @Controller
 public class BlogController {
@@ -18,9 +20,22 @@ public class BlogController {
     @Autowired
     private BlogService blogService;
 
+    @Autowired
+    private CategoryService categoryService;
+
+    @ModelAttribute("categories")
+    public Iterable<Category> categories() {
+        return categoryService.findAll();
+    }
+
     @GetMapping("/")
-    public ModelAndView listBlogs() {
-        List<Blog> blogs = blogService.findAll();
+    public ModelAndView listBlogs(@RequestParam("c")Optional<String> c, Pageable pageable) {
+        Page<Blog> blogs;
+        if(c.isPresent()) {
+            blogs = blogService.findAllByTitleAndWriterAndContent(c.get(), c.get(), c.get(), pageable);
+        } else {
+            blogs = blogService.findAll(pageable);
+        }
         ModelAndView modelAndView = new ModelAndView("/blog/list");
         modelAndView.addObject("blogs", blogs);
         return modelAndView;
