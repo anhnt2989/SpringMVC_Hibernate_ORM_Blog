@@ -9,13 +9,14 @@
     h1 {
         text-align: center;
         overflow: hidden;
-        background: linear-gradient(90deg, #000, #ffb419,#000);
-        background-repeat: no-repeat ;
+        background: linear-gradient(90deg, #000, #ffb419, #000);
+        background-repeat: no-repeat;
         background-size: 80%;
         animation: animate 3s linear infinite;
         -webkit-background-clip: text;
-        -webkit-text-fill-color: rgba(255,255,255,0);
+        -webkit-text-fill-color: rgba(255, 255, 255, 0);
     }
+
     @keyframes animate {
         0% {
             background-position: -500%;
@@ -39,6 +40,19 @@
 
     h2 {
         text-align: center;
+        -webkit-animation: glow 1s ease-in-out infinite alternate;
+        -moz-animation: glow 1s ease-in-out infinite alternate;
+        animation: glow 1s ease-in-out infinite alternate;
+    }
+
+    @-webkit-keyframes glow {
+        from {
+            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073, 0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
+        }
+
+        to {
+            text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6, 0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+        }
     }
 
     #form {
@@ -47,6 +61,7 @@
         left: 220px;
         color: white;
     }
+
 
     body {
         background-image: url("http://4.bp.blogspot.com/_2sKYQ1R6pjc/TPvdg-uhPiI/AAAAAAAAAY8/vL5T6v9Pen4/s1600/_silent+night+2.jpg");
@@ -80,13 +95,15 @@
 <form id="form" th:action="@{/edit-blog}" th:object="${blog}" method="get">
 
     <h1>Welcome to <span th:text="${blog.writer}"></span>'s blog</h1>
+    <br>
 
     <h2 th:text="${blog.title}"></h2>
+    <br>
 
     <p id="content" th:text="${blog.content}"></p>
 
     <div id="writer">
-    Wrote by : <span th:text="${blog.writer}"></span>
+        Wrote by : <span th:text="${blog.writer}"></span>
     </div>
 </form>
 </body>

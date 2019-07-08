@@ -73,12 +73,12 @@ public class AppConfig extends WebMvcConfigurerAdapter implements ApplicationCon
     }
 
     @Bean
-    public BlogRepository customerRepository(){
+    public BlogRepository blogRepository(){
         return new BlogRepositoryImpl();
     }
 
     @Bean
-    public BlogService customerService(){
+    public BlogService blogService(){
         return new BlogServiceImpl();
     }
 
